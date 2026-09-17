@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { taskSchema } from "@/lib/validations";
 import { serializeTask, type TaskWithRelations } from "@/lib/serialize";
 import { computeNextDueDate } from "@/lib/recurrence";
+import { withErrorHandling } from "@/lib/api-handler";
 
 const taskInclude = { course: true, subtasks: true } as const;
 
@@ -23,10 +24,10 @@ function isQuickUpdate(
   return keys.length > 0 && keys.every((key) => QUICK_UPDATE_KEYS.has(key));
 }
 
-export async function PATCH(
+export const PATCH = withErrorHandling(async (
   request: Request,
   { params }: { params: Promise<{ id: string }> }
-) {
+) => {
   const session = await auth();
   if (!session?.user?.id) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -149,12 +150,12 @@ export async function PATCH(
   ]);
 
   return NextResponse.json({ task: serializeTask(task) });
-}
+});
 
-export async function DELETE(
+export const DELETE = withErrorHandling(async (
   _request: Request,
   { params }: { params: Promise<{ id: string }> }
-) {
+) => {
   const session = await auth();
   if (!session?.user?.id) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -168,4 +169,4 @@ export async function DELETE(
 
   await prisma.task.delete({ where: { id } });
   return NextResponse.json({ success: true });
-}
+});

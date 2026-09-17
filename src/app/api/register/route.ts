@@ -2,8 +2,9 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { registerSchema } from "@/lib/validations";
+import { withErrorHandling } from "@/lib/api-handler";
 
-export async function POST(request: Request) {
+export const POST = withErrorHandling(async (request: Request) => {
   const body = await request.json().catch(() => null);
   const parsed = registerSchema.safeParse(body);
 
@@ -31,4 +32,4 @@ export async function POST(request: Request) {
   });
 
   return NextResponse.json({ user }, { status: 201 });
-}
+});

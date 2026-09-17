@@ -2,7 +2,6 @@ import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { serializeCourse } from "@/lib/serialize";
-import { NavBar } from "@/components/nav-bar";
 import { ProfileForm } from "@/components/profile-form";
 import { ThemeSettings } from "@/components/theme-settings";
 import { CourseManager } from "@/components/course-manager";
@@ -17,14 +16,11 @@ export default async function SettingsPage() {
   });
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <NavBar userName={session.user.name ?? session.user.email ?? "Account"} />
-      <main className="mx-auto w-full max-w-2xl flex-1 space-y-6 px-4 py-8 sm:px-6">
-        <h1 className="font-serif text-2xl font-semibold text-navy-900">Settings</h1>
-        <ProfileForm name={session.user.name ?? ""} />
-        <ThemeSettings />
-        <CourseManager initialCourses={courses.map(serializeCourse)} />
-      </main>
-    </div>
+    <main className="mx-auto w-full max-w-2xl flex-1 space-y-6 px-4 py-8 sm:px-6">
+      <h1 className="font-serif text-2xl font-semibold text-navy-900">Settings</h1>
+      <ProfileForm name={session.user.name ?? ""} />
+      <ThemeSettings />
+      <CourseManager initialCourses={courses.map(serializeCourse)} />
+    </main>
   );
 }

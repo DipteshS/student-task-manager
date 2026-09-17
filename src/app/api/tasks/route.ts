@@ -4,10 +4,11 @@ import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { taskSchema } from "@/lib/validations";
 import { serializeTask } from "@/lib/serialize";
+import { withErrorHandling } from "@/lib/api-handler";
 
 const taskInclude = { course: true, subtasks: true } as const;
 
-export async function GET(request: Request) {
+export const GET = withErrorHandling(async (request: Request) => {
   const session = await auth();
   if (!session?.user?.id) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -47,9 +48,9 @@ export async function GET(request: Request) {
 
   const tasks = await prisma.task.findMany({ where, orderBy, include: taskInclude });
   return NextResponse.json({ tasks: tasks.map(serializeTask) });
-}
+});
 
-export async function POST(request: Request) {
+export const POST = withErrorHandling(async (request: Request) => {
   const session = await auth();
   if (!session?.user?.id) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -98,4 +99,4 @@ export async function POST(request: Request) {
   });
 
   return NextResponse.json({ task: serializeTask(task) }, { status: 201 });
-}
+});

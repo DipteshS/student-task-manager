@@ -2,8 +2,9 @@ import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { passwordResetConfirmSchema } from "@/lib/validations";
+import { withErrorHandling } from "@/lib/api-handler";
 
-export async function POST(request: Request) {
+export const POST = withErrorHandling(async (request: Request) => {
   const body = await request.json().catch(() => null);
   const parsed = passwordResetConfirmSchema.safeParse(body);
   if (!parsed.success) {
@@ -38,4 +39,4 @@ export async function POST(request: Request) {
   ]);
 
   return NextResponse.json({ success: true });
-}
+});

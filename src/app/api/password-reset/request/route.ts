@@ -2,10 +2,11 @@ import { randomBytes } from "crypto";
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { passwordResetRequestSchema } from "@/lib/validations";
+import { withErrorHandling } from "@/lib/api-handler";
 
 const TOKEN_TTL_MS = 60 * 60 * 1000;
 
-export async function POST(request: Request) {
+export const POST = withErrorHandling(async (request: Request) => {
   const body = await request.json().catch(() => null);
   const parsed = passwordResetRequestSchema.safeParse(body);
   if (!parsed.success) {
@@ -38,4 +39,4 @@ export async function POST(request: Request) {
   console.log(`[password-reset] dev-mode reset link for ${user.email}: ${resetUrl}`);
 
   return NextResponse.json({ message: genericMessage, resetUrl });
-}
+});

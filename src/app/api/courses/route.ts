@@ -3,8 +3,9 @@ import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { courseSchema } from "@/lib/validations";
 import { serializeCourse } from "@/lib/serialize";
+import { withErrorHandling } from "@/lib/api-handler";
 
-export async function GET() {
+export const GET = withErrorHandling(async () => {
   const session = await auth();
   if (!session?.user?.id) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -16,9 +17,9 @@ export async function GET() {
   });
 
   return NextResponse.json({ courses: courses.map(serializeCourse) });
-}
+});
 
-export async function POST(request: Request) {
+export const POST = withErrorHandling(async (request: Request) => {
   const session = await auth();
   if (!session?.user?.id) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -38,4 +39,4 @@ export async function POST(request: Request) {
   });
 
   return NextResponse.json({ course: serializeCourse(course) }, { status: 201 });
-}
+});
