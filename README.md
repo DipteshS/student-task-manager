@@ -35,6 +35,9 @@ and Prisma.
 - Accessible: focus-trapped dialogs with focus restore, `htmlFor`/`id`-paired labels, and text
   colors checked against WCAG AA contrast
 - Unit tests (Vitest) and a GitHub Actions CI pipeline (lint, test, build — which typechecks)
+- SEO metadata (Open Graph/Twitter tags, per-page titles, `robots.txt`, `sitemap.xml`) and
+  standard security response headers (HSTS, frame options, content-type sniffing, referrer/
+  permissions policy)
 
 ## Tech stack
 
@@ -168,3 +171,7 @@ rather than as a separate one, since `next build` runs a full TypeScript check i
   [Supabase](https://supabase.com) both have generous free tiers well suited to this project. Run
   `npm run db:deploy` (or let your CI run it) against the production `DATABASE_URL` to apply
   migrations.
+
+## License
+
+MIT — see [LICENSE](./LICENSE).
