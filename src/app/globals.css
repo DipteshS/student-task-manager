@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f8f4ea;
+  --foreground: #1c2430;
+  --rule-color: rgba(14, 31, 54, 0.05);
+
+  /* Brand chrome — intentionally invariant across light/dark (nav bar, primary buttons) */
+  --color-brand-100: #dbe7f3;
+  --color-brand-300: #8babcf;
+  --color-brand-600: #2c5282;
+  --color-brand-800: #1a3453;
+  --color-brand-900: #16304f;
+  --color-brand-950: #0e1f36;
+  --color-danger: #b3372f;
+  --color-danger-hover: #9c2f28;
+
+  /* Content tokens — re-themed for dark mode below */
+  --color-navy-50: #f0f5fa;
+  --color-navy-100: #dbe7f3;
+  --color-navy-200: #b8cfe6;
+  --color-navy-300: #8babcf;
+  --color-navy-400: #4a729e;
+  --color-navy-500: #3d6a94;
+  --color-navy-600: #2c5282;
+  --color-navy-700: #23446b;
+  --color-navy-800: #1a3453;
+  --color-navy-900: #16304f;
+  --color-navy-950: #0e1f36;
+
+  --color-gold-100: #f5ead0;
+  --color-gold-400: #d8b672;
+  --color-gold-500: #c19a49;
+  --color-gold-600: #8a6a26;
+
+  --color-maroon-100: #f2e1df;
+  --color-maroon-600: #7d3230;
+
+  --color-forest-100: #e2eae1;
+  --color-forest-600: #3f5d43;
+
+  --color-parchment: #f8f4ea;
+  --color-surface: #ffffff;
+}
+
+:root[data-theme="dark"] {
+  --background: #10161f;
+  --foreground: #ece7da;
+  --rule-color: rgba(236, 231, 218, 0.045);
+
+  --color-navy-50: #1a2130;
+  --color-navy-100: #232b3d;
+  --color-navy-200: #2d374d;
+  --color-navy-300: #55627e;
+  --color-navy-400: #8291ad;
+  --color-navy-500: #8fa0c0;
+  --color-navy-600: #9fb3d6;
+  --color-navy-700: #c3d0e8;
+  --color-navy-800: #d7e0f2;
+  --color-navy-900: #f0f4fa;
+  --color-navy-950: #ffffff;
+
+  --color-gold-100: #3a3016;
+  --color-gold-400: #e2c07e;
+  --color-gold-500: #d8b366;
+  --color-gold-600: #e6bf6e;
+
+  --color-maroon-100: #3a2020;
+  --color-maroon-600: #e08585;
+
+  --color-forest-100: #1e2b20;
+  --color-forest-600: #7fb086;
+
+  --color-parchment: #10161f;
+  --color-surface: #1a212e;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-serif: var(--font-display-serif);
+  --font-mono: var(--font-geist-mono);
+
+  --color-brand-100: var(--color-brand-100);
+  --color-brand-300: var(--color-brand-300);
+  --color-brand-600: var(--color-brand-600);
+  --color-brand-800: var(--color-brand-800);
+  --color-brand-900: var(--color-brand-900);
+  --color-brand-950: var(--color-brand-950);
+  --color-danger: var(--color-danger);
+  --color-danger-hover: var(--color-danger-hover);
+
+  --color-navy-50: var(--color-navy-50);
+  --color-navy-100: var(--color-navy-100);
+  --color-navy-200: var(--color-navy-200);
+  --color-navy-300: var(--color-navy-300);
+  --color-navy-400: var(--color-navy-400);
+  --color-navy-500: var(--color-navy-500);
+  --color-navy-600: var(--color-navy-600);
+  --color-navy-700: var(--color-navy-700);
+  --color-navy-800: var(--color-navy-800);
+  --color-navy-900: var(--color-navy-900);
+  --color-navy-950: var(--color-navy-950);
+
+  --color-gold-100: var(--color-gold-100);
+  --color-gold-400: var(--color-gold-400);
+  --color-gold-500: var(--color-gold-500);
+  --color-gold-600: var(--color-gold-600);
+
+  --color-maroon-100: var(--color-maroon-100);
+  --color-maroon-600: var(--color-maroon-600);
+
+  --color-forest-100: var(--color-forest-100);
+  --color-forest-600: var(--color-forest-600);
+
+  --color-parchment: var(--color-parchment);
+  --color-surface: var(--color-surface);
+}
+
+body {
+  background-color: var(--background);
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 31px,
+    var(--rule-color) 31px,
+    var(--rule-color) 32px
+  );
+  color: var(--foreground);
+}

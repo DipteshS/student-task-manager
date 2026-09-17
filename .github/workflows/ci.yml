@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  DATABASE_URL: "postgresql://user:password@localhost:5432/student_task_manager?schema=public"
+  AUTH_SECRET: "ci-placeholder-secret-not-used-for-anything-real"
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      # Using `npm install` rather than `npm ci`: this lockfile was generated on
+      # macOS and doesn't carry every Linux-only optional native-dependency
+      # variant (npm doesn't proactively record other platforms' optional deps
+      # when resolving locally), which `npm ci`'s stricter sync check rejects.
+      # `npm install` resolves correctly for whatever platform it runs on.
+      - name: Install dependencies
+        run: npm install
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Unit tests
+        run: npm run test
+
+      # `next build` runs a full TypeScript check as one of its own phases, so a
+      # separate `tsc --noEmit` step is redundant here — and would actually fail
+      # on a fresh checkout anyway, since Next's route-typing helpers (e.g.
+      # `LayoutProps`) are generated as a side effect of the build itself.
+      - name: Build
+        run: npm run build
