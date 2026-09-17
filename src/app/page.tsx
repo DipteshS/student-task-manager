@@ -53,26 +53,12 @@ export default async function Home() {
   return (
     <div className="flex min-h-screen flex-col">
       <header className="border-b-2 border-gold-500 bg-brand-950">
-        <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-4 py-4 sm:px-6">
+        <div className="mx-auto flex w-full max-w-5xl items-center px-4 py-4 sm:px-6">
           <div className="flex items-center gap-2.5 text-white">
             <GraduationCap className="h-6 w-6 text-gold-400" />
             <span className="font-serif text-lg font-semibold tracking-wide">
               Student Task Manager
             </span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Link href="/login">
-              <Button
-                variant="outline"
-                size="sm"
-                className="border-brand-600 bg-transparent text-brand-100 hover:bg-brand-900 hover:text-white"
-              >
-                Sign in
-              </Button>
-            </Link>
-            <Link href="/register">
-              <Button size="sm">Create account</Button>
-            </Link>
           </div>
         </div>
       </header>
