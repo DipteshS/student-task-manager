@@ -1,7 +1,9 @@
 {
   "name": "student-task-manager",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
+  "description": "A full-stack student task management app with courses, tags, recurring tasks, calendar and board views, and progress analytics.",
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

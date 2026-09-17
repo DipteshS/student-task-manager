@@ -1,7 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { GraduationCap, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+
+export const metadata: Metadata = {
+  title: "Page Not Found",
+};
 
 export default function NotFound() {
   return (

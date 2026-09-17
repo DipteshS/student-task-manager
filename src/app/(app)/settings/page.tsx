@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -5,6 +6,10 @@ import { serializeCourse } from "@/lib/serialize";
 import { ProfileForm } from "@/components/profile-form";
 import { ThemeSettings } from "@/components/theme-settings";
 import { CourseManager } from "@/components/course-manager";
+
+export const metadata: Metadata = {
+  title: "Settings",
+};
 
 export default async function SettingsPage() {
   const session = await auth();

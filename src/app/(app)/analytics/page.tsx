@@ -1,8 +1,13 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { serializeTask } from "@/lib/serialize";
 import { AnalyticsDashboard } from "@/components/analytics-dashboard";
+
+export const metadata: Metadata = {
+  title: "Analytics",
+};
 
 export default async function AnalyticsPage() {
   const session = await auth();

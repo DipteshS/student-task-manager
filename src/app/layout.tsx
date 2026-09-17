@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import { Providers } from "@/components/providers";
+import { siteUrl, siteName, siteDescription } from "@/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -19,8 +20,26 @@ const displaySerif = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Student Task Manager",
-  description: "Manage your academic and personal tasks in one place.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: siteName,
+    template: `%s · ${siteName}`,
+  },
+  description: siteDescription,
+  icons: {
+    icon: "/icon.svg",
+  },
+  openGraph: {
+    title: siteName,
+    description: siteDescription,
+    siteName,
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: siteName,
+    description: siteDescription,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

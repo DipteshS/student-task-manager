@@ -1,8 +1,13 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { serializeCourse, serializeTask } from "@/lib/serialize";
 import { TaskManager } from "@/components/task-manager";
+
+export const metadata: Metadata = {
+  title: "Tasks",
+};
 
 export default async function TasksPage({
   searchParams,
